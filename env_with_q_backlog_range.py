@@ -352,31 +352,7 @@ class Vehicle_model():
          
           return np.array((action_x,action_y))
 
-   # def new_action(self, x_curr, action):
-          
-        
-   #        action_x = action[0,0]
-   #        action_y = action[1,0]
-   #        # pdb.set_trace()
-   #        # action_x_orig = orig_cntrl[0]
-   #        # action_y_orig = orig_cntrl[1]
-         
-   #        # Dimension x is activated.
-   #        if self.flag_x_act:
-   #            if (x_curr[0,0] >= 870 or x_curr[0,0] <= -870):
-   #                   action_x = -np.sign(x_curr[0,0])*3
-   #        else:
-   #            action_x = action[0,0]
-              
-   #        if self.flag_y_act:
-   #            if (x_curr[1,0] >= 870 or x_curr[1,0] <= -870):
-   #                   action_y = -np.sign(x_curr[1,0])*3
-   #        else:
-   #            action_y = action[1,0]
-          
-         
-   #        return np.array((action_x,action_y))
-     
+  
         
    def wrapped_position(self, x_curr):
        flag = True      
@@ -645,121 +621,7 @@ class Vehicle_model():
       current_control = cntrl
      
       return self.car[:,-1], current_control
-   #self.car[:,k+1], current_control
-
-   # def state_evolution(self,k):
-   #    """
-   #    State evolution of car to find packet
-   #    J(k+1) is a function of x(k) and u(k)
-   #    Penalising fact from environment to the car based on true state and control 
-   #    input which in turn is a function of estimated state
-   #    To Do: 
-   #    Parameters
-   #    ----------
-   #    k : current time
-   #    packet_received: if packet recieved or not, 0 denotes no packet
-
-   #    Returns
-   #    -------
-   #    Next state, current control
-   #    """
-   #    # #take action to add to new state
-   #    action_x = random.uniform(-3, 3)
-   #    action_y = random.uniform(-3,3)
-   #    action = torch.tensor([action_x, action_y])
-   #    action = action.unsqueeze_(1).to(device)
-   #    self.control = self.control[2:]
-   #    self.control = torch.cat((self.control, action),0)
-   #    # Process noise and observation noise
-   #    self.W, self.O = self.noise()
-   #    # Vehicle next step.
-   #    #fix this
-      
-   #    if k==0:
-     
-   #       cntrl = self.control[-2:].cpu().numpy()
-   #       cntrl = np.asarray(cntrl)
-   #       cntrl= cntrl.reshape((2,1))
-   #       x_next = self.A @ self.car[:,k:k+1] + self.B@(cntrl) + self.W
-         
-         
-   #       x_next = self.wrapped_position(x_next)
-   #       # Flag for each dimension.
-   #       if  (x_next[0,0] >= 970 or x_next[0,0] <= -970) :
-   #           self.flag_x_act = True
-   #           # self.count_x = self.count_x + 1
-   #       elif (x_next[0,0] <= 870 or x_next[0,0] >= -870):
-   #           self.flag_x_act = False
-          
-   #       if (x_next[1,0] >= 970 or x_next[1,0] <= -970):
-   #           self.flag_y_act = True
-   #           # self.count_y = self.count_y + 1
-   #       elif (x_next[1,0] <= 870 or x_next[1,0] >= -870):
-   #           self.flag_y_act = False
-            
-   #       if self.flag_x_act or self.flag_y_act:
-   #           act_new = self.new_action(x_next, cntrl)
-   #           self.control = self.control[2:]
-   #           cntrl = act_new
-   #           act_new =  torch.tensor(act_new)
-   #           act_new = act_new.unsqueeze_(1)
-            
-   #           act_new = act_new.to(device)
-   #           self.control = torch.cat((self.control,act_new ),0)
-   #           cntrl = cntrl.reshape(2,1)
-   #           x_next = self.A @ self.car[:,k:k+1] + self.B@(cntrl) + self.W
-        
-         
-   #    else:          
-      
-   #       cntrl = self.control[-2:].cpu().numpy()
-   #       cntrl = np.asarray(cntrl)
-   #       cntrl= cntrl.reshape((2,1))
-   #       x_next = self.A @ self.car[:,k:k+1] + self.B @ cntrl + self.W
-   #       x_next = self.wrapped_position(x_next)
-         
-   #       if  (x_next[0,0] >= 970 or x_next[0,0] <= -970):
-   #           self.flag_x_act = True
-            
-   #       elif (x_next[0,0] <= 870 or x_next[0,0] >= -870):
-   #           self.flag_x_act = False
-             
-   #       if (x_next[1,0] >= 970 or x_next[1,0] <= -970) :
-   #           self.flag_y_act = True
-             
-   #       elif (x_next[1,0] <= 870 or x_next[1,0] >= -870):
-   #           self.flag_y_act = False
-            
-   #       if self.flag_x_act or self.flag_y_act:
-   #           act_new = self.new_action(x_next, cntrl)
-   #           # pdb.set_trace()
-   #           self.control = self.control[2:]
-   #           cntrl = act_new
-   #           act_new =  torch.tensor(act_new)
-   #           act_new = act_new.unsqueeze_(1)
-            
-   #           act_new = act_new.to(device)
-   #           self.control = torch.cat((self.control,act_new ),0)
-   #           cntrl = cntrl.reshape(2,1)
-   #           x_next = self.A @ self.car[:,k:k+1] + self.B@(cntrl) + self.W
-   #           x_next = self.wrapped_position(x_next)
-       
-   #    # Plant (car), no evolution, use x_next as it is to move,true position
-   #    self.car = np.append(self.car,np.reshape(x_next,(4,1)),axis=1)
-      
-      
-   #    # Measurement (camera)
-   #    current_camera = np.asarray(x_next + self.O)
-   #    current_camera = np.reshape(current_camera,(4,1))
-   #    self.camera = np.append(self.camera, current_camera, axis=1)
-      
-     
-   #    # current_control = action
-   #    #-(self.K_est @ self.post[:,k:k+1])
-   #    #change this accrding to estimated sstate
-   #    current_control = cntrl
-     
-   #    return self.car[:,-1], current_control
+  
   
    def env_step(self, agent_AC, k, model,  steps_done):
       """
@@ -826,22 +688,6 @@ class Vehicle_model():
            # pdb.set_trace()
            self.last_age = self.age_policy[-1].item()*torch.ones(self.control_actions)
            
-           # temp_policy = torch.cat((state_learn.T, \
-           #                          self.last_age.unsqueeze(0).T.to(device)),0)
-           # temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
-           #                          self.last_age.unsqueeze(0).T.to(device),\
-                                        
-           #                                     torch.tensor([[self.backlog[-1] ]]).to(device),\
-                                                  
-           #                                             torch.tensor([[self.reset_age]]).to(device)),0)
-
-           # temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
-    
-           #                              torch.tensor([[self.avg_a]]).to(device),\
-           #                                  torch.tensor([[self.avg_p]]).to(device),\
-           #                                  torch.tensor([[self.avg_backlog]]).to(device),\
-                                             
-           #                                         torch.tensor([[self.avg_reset]]).to(device)),0)
 
            temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
     
@@ -874,24 +720,7 @@ class Vehicle_model():
            self.avg_backlog = self.avg_backlog + 1/(k+1)*(self.backlog[-1] - self.avg_backlog)
            
            
-           # temp_policy = torch.cat((state_learn.T, \
-           #                          self.last_age.unsqueeze(0).T.to(device)),0)
-          
-           # temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
-           #                          self.last_age.unsqueeze(0).T.to(device),\
-                                        
-           #                                     torch.tensor([[self.backlog[-1] ]]).to(device),\
-                                                  
-           #                                             torch.tensor([[self.reset_age]]).to(device)),0)
-
-           # temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
-    
-           #                              torch.tensor([[self.avg_a]]).to(device),\
-           #                                  torch.tensor([[self.avg_p]]).to(device),\
-           #                                  torch.tensor([[self.avg_backlog]]).to(device),\
-                                             
-           #                                         torch.tensor([[self.avg_reset]]).to(device)),0)
-
+         
            
            temp_policy = torch.cat((state_learn.T, torch.tensor(self.age_h).unsqueeze(0).T.to(device),\
     

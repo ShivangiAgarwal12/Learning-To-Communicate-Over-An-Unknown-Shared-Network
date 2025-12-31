@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-age as loss with multiple buffers 
-for initial values for t alpha, file is in DSAC_RL under folder name actor_critic_td0/Discrete SAC with kalman
-on 192.168.30.243 
+Main Training file
 """
 
 import math
@@ -10,14 +8,7 @@ import random
 import numpy as np
 import matplotlib.pyplot as plt
 import os
-# import env_with_q_backlog_v2 as SVS
-# import env_with_q_backlog_expo as SVS
-# import env_with_q_backlog_nohist as SVS
-# import env_with_q_backlog_lstm as SVS
 import env_with_q_backlog_range as SVS
-# import env_with_q_backlog_range_age_sec as SVS
-# import corev2 as core
-# import corev3 as core
 import corev5 as core
 import torch
 import DSAC_RL_v2 as RL
@@ -227,15 +218,6 @@ for ep in range(max(ep,0),episodes):
         choice_buffer = 2
         n_steps = 5
 
-    # if choice_service == 0.6 or choice_service == 0.8:
-    #     config.q = np.random.uniform(choice_service, choice_service + 0.1)
-    #     # agent_DSAC.t_alpha = 0.8
-    #     # lower, upper, scale = choice_service, choice_service + 0.2, 1/4.0
-    #     # q_sample_high = stats.truncexpon(b=(upper-lower)/scale, loc=lower, scale=scale)
-    #     # config.q = q_sample_high.rvs(1)
-    #     agent_DSAC.t_alpha = 0.8
-    #     choice_buffer = 2
-    #     n_steps = 5
         
     if choice_service == 0.1 or choice_service == 0.2:
         config.q = np.random.uniform(choice_service, choice_service + 0.1)
@@ -592,7 +574,7 @@ for ep in range(max(ep,0),episodes):
         torch.save(agent_DSAC.ac.state_dict(), model_DSAC)
         torch.save(agent_lstm.state_dict(), model_lstm)
 
-        #%% Saving data.
+        # Saving data.
         # Save the reward, state, action.
         with open(dir_save + '/state_true.pickle', 'wb') as handle:
             pickle.dump(state_str_t, handle, protocol=pickle.HIGHEST_PROTOCOL)

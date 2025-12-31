@@ -5,3 +5,10 @@ We address the challenge of an agent learning a policy that allows it to decide 
 
 Paper Link: [Learning To Communicate Over An Unknown Shared Network](https://dl.acm.org/doi/10.1145/3786203)
 
+###### Code walk-through
+1. **main_n_steps_general_mse_range.py** : Main file for training.
+2. **env_with_q_backlog_range.py** : Vehicular dynamics in format of gym environment, contains step and reset functions.
+3. **queue_model_mod.py** : Network queue simulation model
+4. **core_v5.py** : Contains neural network models for LSTM, Actor and Critic.
+5. **DSAC_RL_v2.py** : Update functions for SAC, LSTM, LSTM replay buffer, n-step replay buffer
+6. **config.py**: file with all hyperparameters
