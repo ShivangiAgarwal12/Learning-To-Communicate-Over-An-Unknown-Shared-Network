@@ -14,8 +14,7 @@ import os
 # import env_with_q_backlog_expo as SVS
 # import env_with_q_backlog_nohist as SVS
 # import env_with_q_backlog_lstm as SVS
-# import env_with_q_backlog_range as SVS
-import env_rtt as SVS
+import env_with_q_backlog_range as SVS
 # import env_with_q_backlog_range_age_sec as SVS
 # import corev2 as core
 # import corev3 as core
