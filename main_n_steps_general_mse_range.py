@@ -197,7 +197,7 @@ for ep in range(max(ep,0),episodes):
     prob_range = 1/(len(range_1)-1)
     choice_service = np.random.choice(range_1, 1)[0]
     # pick_constant = np.random.choice([0.05,0.08], 1)[0]
-    pick_constant = np.random.choice([0.6,0.8], 1)[0]
+    pick_constant = np.random.choice([0.05,1], 1)[0]
     choice_service = pick_constant
     if choice_service == 0.05 or choice_service == 0.08:
         config.q = np.random.uniform(choice_service, choice_service + 0.03)
